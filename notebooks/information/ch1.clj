@@ -118,7 +118,7 @@
 
 ;; where $n$, as before, is the message length.
 
-;; ### Spot check: computing information
+;; ### Spot check!
 
 ;; Let's actually compute the Nyquist-Hartley definition of information.
 
@@ -199,11 +199,10 @@
 ;; I_{Message}^b = - \displaystyle\sum_{i=1}^n P_{Symbol\_i}^b
 ;; $$
 
-;; ### Spot check: computing probabilities
+;; ### Spot check!
 
 ;; We would expect that computating information with the logarithmic approach
 ;; would produce the same results as computing information using probabilities.
-;; Let's check!
 
 ^{::clerk/visibility {:result :hide}}
 (defn compute-uniform-information
@@ -211,6 +210,8 @@
   (let [N (number-of-messages S n)
         P (emmy/divide 1.0 N)]
     (uniform-probability-information P)))
+
+;; Let's check!
 
 (emmy/=
  (compute-uniform-information 2 1) (compute-nyquist-hartley-information 2 1))
