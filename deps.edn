@@ -8,4 +8,6 @@
         io.github.inferenceql/gen.clj {:git/url "https://github.com/inferenceql/gen.clj"
                                        :git/sha "106b0260f031b2a511ff5d13f7a623a2b28f0072"}}
  :aliases
- {:nextjournal/clerk {:exec-fn user/build!}}}
+ {:nextjournal/clerk
+  {:exec-fn user/build!
+   :exec-args {:paths ["notebooks/information/ch1.clj"]}}}}
