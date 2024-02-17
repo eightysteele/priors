@@ -9,6 +9,5 @@
                                        :git/sha "106b0260f031b2a511ff5d13f7a623a2b28f0072"}}
  :aliases
  {:nextjournal/clerk
-  {:exec-fn user/build!
-   :extra-paths ["dev"]
-   :exec-args {:paths ["notebooks/information/ch1.clj"]}}}}
+  {:extra-paths ["dev" "examples"]
+   :exec-fn user/build!}}}
