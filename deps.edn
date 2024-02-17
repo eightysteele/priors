@@ -1,0 +1,11 @@
+{:paths ["dev" "notebooks"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        io.github.nextjournal/clerk
+        {:git/sha "cbb19fd8f1a9b3b01c9ccb0d43c6dbb4571f3829"}
+        org.mentat/clerk-utils {:mvn/version "0.6.0"}
+        org.mentat/emmy {:mvn/version "0.31.0"}
+        org.mentat/emmy-viewers {:mvn/version "0.3.1"}
+        io.github.inferenceql/gen.clj {:git/url "https://github.com/inferenceql/gen.clj"
+                                       :git/sha "106b0260f031b2a511ff5d13f7a623a2b28f0072"}}
+ :aliases
+ {:nextjournal/clerk {:exec-fn user/build!}}}
