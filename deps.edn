@@ -10,4 +10,5 @@
  :aliases
  {:nextjournal/clerk
   {:exec-fn user/build!
+   :extra-paths ["dev"]
    :exec-args {:paths ["notebooks/information/ch1.clj"]}}}}
