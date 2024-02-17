@@ -2,12 +2,17 @@
  :deps {org.clojure/clojure {:mvn/version "1.11.1"}
         io.github.nextjournal/clerk
         {:git/sha "cbb19fd8f1a9b3b01c9ccb0d43c6dbb4571f3829"}
+        io.github.nextjournal/clerk.render
+        {:git/url "https://github.com/nextjournal/clerk"
+         :git/sha "cbb19fd8f1a9b3b01c9ccb0d43c6dbb4571f3829"
+         :deps/root "render"}
         org.mentat/clerk-utils {:mvn/version "0.6.0"}
         org.mentat/emmy {:mvn/version "0.31.0"}
         org.mentat/emmy-viewers {:mvn/version "0.3.1"}
         io.github.inferenceql/gen.clj {:git/url "https://github.com/inferenceql/gen.clj"
                                        :git/sha "106b0260f031b2a511ff5d13f7a623a2b28f0072"}}
- :aliases
- {:nextjournal/clerk
-  {:extra-paths ["dev" "examples"]
-   :exec-fn user/build!}}}
+ :aliases {:nextjournal/clerk
+           {:exec-fn user/build!
+            :exec-args {:paths ["notebooks/information/ch1.clj"]}
+            :index "notebooks/information/ch1.clj"
+            :nextjournal.clerk/aliases [:dev]}}}

@@ -21,7 +21,7 @@
 
 ;; # Chapter 1. Information as Choice
 
-;; ## Overview
+;; ## Preview
 
 ;; This chapter defines the Nyquist-Hartley definition of information. At the
 ;; end it shows how to compute information using probabilities, assuming a
@@ -31,7 +31,7 @@
 
 ;; In the 1920s, Harry Nyquist and Ralph Hartley set out to improve telegraphic
 ;; transmission speeds at AT&T Bell Labs. To study the problem, they invented a
-;; measure of information. A message **symbol** was the smallest particle of
+;; measure of information. A **symbol** was the smallest particle of
 ;; **information**. In theory, it was anything discrete that could be perceived.
 ;; A **message** was then just an ordered set of symbols, serving as the carrier
 ;; of information.
@@ -39,11 +39,14 @@
 ;; ## How much information is in a message?
 
 ;; How much information a message contains depends on if you're the sender—or
-;; the receiver—of the message. Suppose we have two symbols (a black ball and a
-;; white ball) with a message that carries exactly one symbol. If the sender is
-;; free to choose either ball independently, how much information does a message
-;; carry? Nyquist and Hartley posited the amount of information is just the
-;; number of different messages $N$ from which it was chosen,
+;; the receiver—of the message.
+
+;; Suppose we have two symbols (a black ball and a white ball) with a message
+;; that carries exactly one symbol. If the sender is free to choose either ball
+;; independently, how much information does a message carry?
+
+;; Nyquist and Hartley posited the amount of information is just the number of
+;; different messages $N$ from which it was chosen,
 
 ;; $$
 ;; \begin{equation}
@@ -51,6 +54,7 @@
 ;; \end{equation}
 ;; $$
 
+^{::clerk/visibility {:code :fold :result :hide}}
 (defn number-of-messages
   [S n]
   (emmy/expt S n))
@@ -83,6 +87,7 @@
 ;; \end{equation}
 ;; $$
 
+^{::clerk/visibility {:code :fold :result :hide}}
 (defn nyquist-hartley-information
   [N]
   (emmy/log2 N))
@@ -113,10 +118,11 @@
 
 ;; where $n$, as before, is the message length.
 
-;; ### Example computations
+;; ### Spot check: computing information
 
-;; Here's a function to compute the Nyquist-Hartley definition of information,
+;; Let's actually compute the Nyquist-Hartley definition of information.
 
+^{::clerk/visibility {:result :hide}}
 (defn compute-nyquist-hartley-information
   [S n]
   (let [N (number-of-messages S n)]
@@ -140,17 +146,11 @@
 ^{::clerk/visibility {:result :show}}
 (compute-nyquist-hartley-information 26 5)
 
-;; ## Probabilistically computing information
+;; ## Counting with probabilities
 
 ;; Another way to count possibilities is to compute probabilities.
-;; Nyquist-Hartley assumed a uniform distribution of symbols, which was limited,
-;; since some symbols are more likely than others (for example, consider how
-;; common the letter "e" is compared to "z" is in the English alphabet). In
-;; chapter 2, Shannon drops information entropy which measures the **average
-;; information** per message (or symbol!) using linear combinations of symbol
-;; probabilities. In preparation for that, let's compute some probabilities.
-
-;; By taking the probability of any message,
+;; Nyquist-Hartley assumed a uniform distribution of symbols. Given $N$, you can
+;; find the probability of every message,
 
 ;; $$
 ;; P_{Message}^b = \cfrac{1}{N}
@@ -163,7 +163,7 @@
 ;; $$
 
 ;; and substituting $N$ into (3) gives us information for each message, based on
-;; its probability, under a uniform distribution of an endless supply of
+;; its probability, under a uniform distribution with an endless supply of
 ;; symbols
 
 ;; $$
@@ -172,7 +172,7 @@
 ;; \end{equation}
 ;; $$
 
-
+^{::clerk/visibility {:code :fold :result :hide}}
 (defn uniform-probability-information
   [P]
   (emmy/- (emmy/log2 P)))
@@ -193,18 +193,19 @@
 ;; $$
 
 ;; which means that for a message with $n$ symbols, the information it carries
-;; can be probabalistically computed by summing up symbol probabilities
+;; can be computed by summing up symbol probabilities
 
 ;; $$
 ;; I_{Message}^b = - \displaystyle\sum_{i=1}^n P_{Symbol\_i}^b
 ;; $$
 
-;; ### Spot check
+;; ### Spot check: computing probabilities
 
 ;; We would expect that computating information with the logarithmic approach
 ;; would produce the same results as computing information using probabilities.
 ;; Let's check!
 
+^{::clerk/visibility {:result :hide}}
 (defn compute-uniform-information
   [S n]
   (let [N (number-of-messages S n)
@@ -220,18 +221,20 @@
 (emmy/=
  (compute-uniform-information 26 5) (compute-nyquist-hartley-information 26 5))
 
-;; ## Recap
+;; ## Summary
 
-;; Nyquist and Hartley quantified information in a message—before it was sent—as
-;; the count of different messages from which it was chosen. To make information
-;; linearly proportional to message length, they went with relative counts using
-;; logarithms. The main assumption in their approach was an independent
-;; selection of an endless supply of symbols from a uniform distribution. We
-;; ended by exploring an approach to computing information based on
-;; probabilities.
+;; Nyquist and Hartley quantified information in a message as the count of
+;; different messages from which it was chosen. To make information linearly
+;; proportional to message length, they measured relative counts using
+;; logarithms. The definition assumed that symbols were chosen independently
+;; from a uniform distribution, from which there was an endless supply.
 
-;; ## Next up
+;; ## Reflections
 
-;; In chapter 2 the author explores computing information based on a non-uniform
-;; distribution of symbols using Shannon's method of computing the average
-;; information per message.
+;; The conceptual definition of information seemed very puzzling to me. Then I
+;; realized that a message is fundamentally (mathematically and existentially!)
+;; interconnected with the universe of messages from where it came. A message
+;; doesn't even exist without that universe, and vice versa (or so I would
+;; argue). From that perspective, a message is inseperable from that universe
+;; and the definition seems less puzzling. :)
+
